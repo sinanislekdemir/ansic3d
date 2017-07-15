@@ -91,3 +91,5 @@ Or just run to compule and install the library and run the tests.
 sinan islekdemir | sinan@islekdemir.com 
 
 
+## Note
+I only compiled the code under MacOs so let me know if it works for you too.
