@@ -1,0 +1,23 @@
+{
+    "builder": "gcc", 
+    "cflags": "", 
+    "debug": true, 
+    "includes": [
+        "./includes"
+    ], 
+    "libraries": ["m"], 
+    "library_search_paths": [], 
+    "name": "Example Project", 
+    "output": "library", 
+    "output_dir": "build", 
+    "output_name": "libansic3d.a", 
+    "run_after_build": true, 
+    "source_extension": ".c", 
+    "install": [
+        ["build/libansic3d.a", ["/usr/local/lib", "/usr/lib"]],
+        ["./includes", "!/usr/local/include/ansic3d/"]
+    ],
+    "sources": [
+        "./sources"
+    ]
+}

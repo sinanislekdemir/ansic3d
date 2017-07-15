@@ -1,0 +1,19 @@
+{
+    "builder": "gcc", 
+    "cflags": "", 
+    "debug": true, 
+    "includes": [
+        "./includes"
+    ], 
+    "libraries": ["ansic3d"], 
+    "library_search_paths": ["./build"], 
+    "name": "Ansic3 Test", 
+    "output": "binary", 
+    "output_dir": "build", 
+    "output_name": "test", 
+    "run_after_build": true, 
+    "source_extension": ".c", 
+    "sources": [
+        "./tests"
+    ]
+}
