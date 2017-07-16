@@ -119,7 +119,7 @@ void CreateRotationMatrix(Vector3D axis, double angle, Matrix3D * target)
     double cosine, sine, one_minus_cos;
     sine = sin(angle);
     cosine = cos(angle);
-    NormalizeVector3D(&axis);
+    NormalizeVector(&axis);
     one_minus_cos = 1 - cosine;
 
     target->X.x = (one_minus_cos * axis.x * axis.x) + cosine;
@@ -339,10 +339,10 @@ void LookAtMatrix(Vector3D eye,
                   Vector3D up, Matrix3D * matrix)
 {
     Vector3D x_axis, y_axis, z_axis;
-    SubVector3D(eye, target, &z_axis);
-    NormalizeVector3D(&z_axis);
+    SubVector(eye, target, &z_axis);
+    NormalizeVector(&z_axis);
     CrossProduct(up, z_axis, &x_axis);
-    NormalizeVector3D(&x_axis);
+    NormalizeVector(&x_axis);
     CrossProduct(z_axis, x_axis, &y_axis);
     CloneVector(x_axis, &matrix->X);
     CloneVector(y_axis, &matrix->Y);

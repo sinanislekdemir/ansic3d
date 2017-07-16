@@ -6,7 +6,7 @@ void CloneVector(Vector3D from, Vector3D * to)
     SetVector(from.x, from.y, from.z, from.w, to);
 }
 
-void AddVector3D(Vector3D p1, Vector3D p2, Vector3D * target)
+void AddVector(Vector3D p1, Vector3D p2, Vector3D * target)
 {
     target->x = p1.x + p2.x;
     target->y = p1.y + p2.y;
@@ -14,7 +14,7 @@ void AddVector3D(Vector3D p1, Vector3D p2, Vector3D * target)
 }
 
 
-void SubVector3D(Vector3D p1, Vector3D p2, Vector3D * target)
+void SubVector(Vector3D p1, Vector3D p2, Vector3D * target)
 {
     target->x = p1.x - p2.x;
     target->y = p1.y - p2.y;
@@ -39,7 +39,7 @@ void CrossProduct(Vector3D v1, Vector3D v2, Vector3D * target)
 }
 
 
-void NormalizeVector3D(Vector3D * target)
+void NormalizeVector(Vector3D * target)
 {
     double invlen;
     double vn;
@@ -172,8 +172,8 @@ void PrintVector(Vector3D v)
 void PlaneNormal(Vector3D v1, Vector3D v2, Vector3D v3, Vector3D * result)
 {
     Vector3D t1, t2;
-    SubVector3D(v2, v1, &t1);
-    SubVector3D(v3, v1, &t2);
+    SubVector(v2, v1, &t1);
+    SubVector(v3, v1, &t2);
     CrossProduct(t1, t2, result);
-    NormalizeVector3D(result);
+    NormalizeVector(result);
 }

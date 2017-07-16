@@ -4,6 +4,39 @@
 #include <stdio.h>
 
 
+void VectorTest()
+{
+    Vector3D a, b, c, result;
+    double d;
+    SetVector(0, 0, 0, 1, &result);
+    SetVector(5, 5, 5, 1, &a);
+    SetVector(3, 4, 2, 1, &b);
+    SetVector(6.5, 7.2, 9.3, 1, &c);
+    printf("Vectors: \n");
+    printf("A: ");
+    PrintVector(a);
+    printf("B: ");
+    PrintVector(b);
+    printf("C: ");
+    PrintVector(c);
+    AddVector(a, b, &result);
+    printf("A + B: \n");
+    PrintVector(result);
+    SubVector(c, b, &result);
+    printf("C - B: \n");
+    PrintVector(result);
+    NormalizeVector(&result);
+    printf("Normalized C - B: \n");
+    PrintVector(result);
+    printf("Rotate C Around Z by 45 Degrees:\n");
+    RotateAroundZ(&c, degtorad(45));
+    PrintVector(c);
+    printf("Distance from A to C: ");
+    d = VectorDistance(a, c);
+    printf("%f\n", d);
+}
+
+
 void MatrixInversionTest()
 {
     Matrix3D m;
@@ -80,6 +113,8 @@ void VectorListTest()
 
 int main()
 {
+    printf("Vector Test\n");
+    VectorTest();
     printf("Matrix Inversion Test\n");
     MatrixInversionTest();
     printf("Camera Position Test\n");
