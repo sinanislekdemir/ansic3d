@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ansic3d/vector3d.h>
+#include <ansic3d/config.h>
 
 typedef struct _VectorList
 {
@@ -12,28 +13,11 @@ typedef struct _VectorList
     unsigned int count;
 } VectorList;
 
-/**
- * This must be called in order to allocate the initial variables
- * and memory address;
- */
 void InitVectorList(VectorList * list);
-/**
- * Push vector to the vector list;
- * returns the index of last vector 
- * or (-1) if fails to allocate memory
- */
 int PushVector(Vector3D v, VectorList * list);
-/**
- * Pop last vector from list
- */
 void PopVector(VectorList * list, Vector3D * target);
-/**
- * Simply pops the last item but does not return back
- */
+void RemoveVectorIndex(VectorList * list, int index);
 void RemoveLastVector(VectorList * list);
-/**
- * Free the memory allocated for the vector list
- */
-void FreeVector(VectorList * v);
+void FreeVectorList(VectorList * list);
 
 #endif

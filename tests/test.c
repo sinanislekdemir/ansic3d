@@ -96,6 +96,7 @@ void VectorListTest()
     printf("Total %d items in list\n", mylist.count);
     for(i=0; i < mylist.count; i++)
     {
+        printf("%d: ", i);
         PrintVector(mylist.vectors[i]);
     }
 
@@ -103,11 +104,19 @@ void VectorListTest()
     RemoveLastVector(&mylist);
     for(i=0; i < mylist.count; i++)
     {
+        printf("%d: ", i);
         PrintVector(mylist.vectors[i]);
     }
 
+    printf("Remove index 1 from list\n");
+    RemoveVectorIndex(&mylist, 1);
+    for(i=0; i < mylist.count; i++)
+    {
+        printf("%d: ", i);
+        PrintVector(mylist.vectors[i]);
+    }
 
-    FreeVector(&mylist);
+    FreeVectorList(&mylist);
 }
 
 

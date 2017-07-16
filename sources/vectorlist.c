@@ -8,6 +8,9 @@ int PushVector(Vector3D v, VectorList * list)
                       list->count * sizeof(Vector3D));
     if (p == NULL)
     {
+#ifdef ANSIC3D_DEBUG
+        printf("Cannot allocate memory!\n");
+#endif
         list->count -= 1;
         return -1;
     }else{
@@ -18,11 +21,11 @@ int PushVector(Vector3D v, VectorList * list)
 }
 
 
-void FreeVector(VectorList * v)
+void FreeVectorList(VectorList * list)
 {
-    free(v->vectors);
-    v->vectors = NULL;
-    v->count = 0;
+    free(list->vectors);
+    list->vectors = NULL;
+    list->count = 0;
 }
 
 
@@ -38,6 +41,9 @@ void PopVector(VectorList * list, Vector3D * target)
     Vector3D * temp;
     if(list->count == 0)
     {
+#ifdef ANSIC3D_DEBUG
+        printf("List is empty\n");
+#endif
         return;
     }
     CloneVector(list->vectors[list->count-1], target);
@@ -45,6 +51,9 @@ void PopVector(VectorList * list, Vector3D * target)
                    (list->count - 1) * sizeof(Vector3D));
     if (temp == NULL)
     {
+#ifdef ANSIC3D_DEBUG
+        printf("Cannot reallocate memory\n");
+#endif
         return;
     }
     list->vectors = temp;
@@ -56,4 +65,35 @@ void RemoveLastVector(VectorList * list)
 {
     Vector3D v;
     PopVector(list, &v);
+}
+
+
+void RemoveVectorIndex(VectorList * list, int index)
+{
+    unsigned int i, j;
+    if(list->count <= index)
+    {
+#ifdef ANSIC3D_DEBUG
+        printf("List index out of bounds\n");
+#endif
+        return;
+    }
+    Vector3D * temp = malloc((list->count - 1) * sizeof(Vector3D));
+    if(temp == NULL)
+    {
+#ifdef ANSIC3D_DEBUG
+        printf("Cannot allocate memory\n");
+#endif
+        return;
+    }
+    j = 0;
+    for(i = 0; i < list->count; i++)
+    {
+        if(i != index){
+            CloneVector(list->vectors[i], &temp[j++]);
+        }
+    }
+    free(list->vectors);
+    list->vectors = temp;
+    list->count -= 1;
 }

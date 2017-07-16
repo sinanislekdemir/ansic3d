@@ -65,6 +65,17 @@ to identify an objects location and direction
 | LookAtMatrix | eye, target, up, matrix | Calculate look-at matrix for given eye position, to target with given up vector |
 
 
+## VectorList
+Vector list is a dynamic 3d vector array with simple functionalities
+| Function | Parameters | Description |
+| -------- | ---------- | ----------- |
+| InitVectorList | list | Initialize the defined VectorList, must be called before using a VectorList |
+| PushVector | v, list | Push vector to the end of array |
+| PopVector | list, target | Pop the last item of the array into target vector and remove it from the VectorList |
+| RemoveLastVector | list | Remove the last item of the array |
+| RemoveVectorIndex | list, index | Remove the index given from the VectorList |
+| FreeVectorList | list | Free VectorList memory, must be called to prevent possible leaks |
+
 ## Installing
 You need bbee (https://github.com/sinanislekdemir/bbee) script in your PATH.
 
