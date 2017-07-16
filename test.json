@@ -5,7 +5,7 @@
     "includes": [
         "./includes"
     ], 
-    "libraries": ["ansic3d"], 
+    "libraries": ["ansic3d", "m"], 
     "library_search_paths": ["./build"], 
     "name": "Ansic3 Test", 
     "output": "binary", 
