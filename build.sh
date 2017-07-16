@@ -1,5 +1,5 @@
 #!/bin/bash
 rm -f build/*
-bbee
-bbee --install
-bbee --i=test.json
+python bbee
+python bbee --install
+python bbee --i=test.json

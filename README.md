@@ -78,20 +78,20 @@ Vector list is a dynamic 3d vector array with simple functionalities
 | FreeVectorList | list | Free VectorList memory, must be called to prevent possible leaks |
 
 ## Installing
-You need bbee (https://github.com/sinanislekdemir/bbee) script in your PATH.
+BBee Build tool is already inside the repo (https://github.com/sinanislekdemir/bbee)
 
 To compile the library:
 
-    bbee
+    python bbee
 
 To install the library:
 
-    bbee --install
+    python bbee --install
 
 
 To compile the tests
 
-    bbee --i=test.json
+    python bbee --i=test.json
 
 Or just run to compule and install the library and run the tests.
 
