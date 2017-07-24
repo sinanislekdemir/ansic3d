@@ -15,7 +15,7 @@
     "source_extension": ".c", 
     "install": [
         ["build/libansic3d.a", ["/usr/local/lib", "/usr/lib"]],
-        ["./includes", "!/usr/local/include/ansic3d/"]
+        ["./includes", "!/usr/local/include/"]
     ],
     "sources": [
         "./sources"
