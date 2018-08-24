@@ -1,7 +1,15 @@
 #include <ansic3d/vector3d.h>
 #include <ansic3d/matrix3d.h>
 
-
+/**
+ * HomogeneousMatrix
+ * Creates a 4x4 Homogenous matrix to work with OpenGL or other
+ * libraries to define the cartesian coordinates and orientation of a point
+ *     1 0 0 0 --> Left Vector
+ *     0 1 0 0 --> Direction Vector
+ *     0 0 1 0 --> Up Vector
+ *     0 0 0 1 --> Position Vector
+ */
 void HomogeneousMatrix(Matrix3D * matrix)
 {
     SetVector(1, 0, 0, 0, &matrix->X);
@@ -10,7 +18,14 @@ void HomogeneousMatrix(Matrix3D * matrix)
     SetVector(0, 0, 0, 1, &matrix->W);
 }
 
-
+/**
+ * EmptyMatrix
+ * Creates a 4x4 empty Matrix
+ *     1 0 0 0 --> Left Vector
+ *     0 1 0 0 --> Direction Vector
+ *     0 0 1 0 --> Up Vector
+ *     0 0 0 1 --> Position Vector
+ */
 void EmptyMatrix(Matrix3D * matrix)
 {
     SetVector(0, 0, 0, 0, &matrix->X);
@@ -19,7 +34,11 @@ void EmptyMatrix(Matrix3D * matrix)
     SetVector(0, 0, 0, 0, &matrix->W);
 }
 
-
+/**
+ * CreateScaleMatrix
+ * Create a scale matrix to let environment know the scale factor
+ * and apply the scaling on the property
+ */
 void CreateScaleMatrix(Vector3D v, Matrix3D * target)
 {
     HomogeneousMatrix(target);
@@ -28,7 +47,11 @@ void CreateScaleMatrix(Vector3D v, Matrix3D * target)
     target->Z.z = v.z;
 }
 
-
+/**
+ * CreateTranslationMatrix
+ * Create a matrix to change the location of a property
+ * This is basically a Homogeneous Matrix except a set position vector
+ */
 void CreateTranslationMatrix(Vector3D v, Matrix3D * target)
 {
     HomogeneousMatrix(target);

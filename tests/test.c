@@ -3,7 +3,6 @@
 #include <ansic3d/vectorlist.h>
 #include <stdio.h>
 
-
 void VectorTest()
 {
     Vector3D a, b, c, result;
@@ -36,7 +35,6 @@ void VectorTest()
     printf("%f\n", d);
 }
 
-
 void MatrixInversionTest()
 {
     Matrix3D m;
@@ -51,7 +49,6 @@ void MatrixInversionTest()
     PrintMatrix(m);
 }
 
-
 void CameraPositionTest()
 {
     Matrix3D cam_matrix;
@@ -63,7 +60,6 @@ void CameraPositionTest()
     PrintMatrix(cam_matrix);
 }
 
-
 void PlaneNormalTest()
 {
     Vector3D p1, p2, p3, result;
@@ -73,7 +69,6 @@ void PlaneNormalTest()
     PlaneNormal(p1, p2, p3, &result);
     PrintVector(result);
 }
-
 
 void VectorListTest()
 {
@@ -94,7 +89,7 @@ void VectorListTest()
     PushVector(v4, &mylist);
 
     printf("Total %d items in list\n", mylist.count);
-    for(i=0; i < mylist.count; i++)
+    for (i = 0; i < mylist.count; i++)
     {
         printf("%d: ", i);
         PrintVector(mylist.vectors[i]);
@@ -102,7 +97,7 @@ void VectorListTest()
 
     printf("Remove last item from list\n");
     RemoveLastVector(&mylist);
-    for(i=0; i < mylist.count; i++)
+    for (i = 0; i < mylist.count; i++)
     {
         printf("%d: ", i);
         PrintVector(mylist.vectors[i]);
@@ -110,7 +105,7 @@ void VectorListTest()
 
     printf("Remove index 1 from list\n");
     RemoveVectorIndex(&mylist, 1);
-    for(i=0; i < mylist.count; i++)
+    for (i = 0; i < mylist.count; i++)
     {
         printf("%d: ", i);
         PrintVector(mylist.vectors[i]);
@@ -118,7 +113,6 @@ void VectorListTest()
 
     FreeVectorList(&mylist);
 }
-
 
 int main()
 {
