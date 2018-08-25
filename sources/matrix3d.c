@@ -1,3 +1,20 @@
+/*
+    AnsiC3D - 3D Math Library
+    Copyright (C) 2018  Sinan ISLEKDEMIR - sinan@islekdemir.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
 #include <ansic3d/vector3d.h>
 #include <ansic3d/matrix3d.h>
 
@@ -10,7 +27,7 @@
  *     0 0 1 0 --> Up Vector
  *     0 0 0 1 --> Position Vector
  */
-void HomogeneousMatrix(Matrix3D * matrix)
+void HomogeneousMatrix(Matrix3D *matrix)
 {
     SetVector(1, 0, 0, 0, &matrix->X);
     SetVector(0, 1, 0, 0, &matrix->Y);
@@ -26,7 +43,7 @@ void HomogeneousMatrix(Matrix3D * matrix)
  *     0 0 1 0 --> Up Vector
  *     0 0 0 1 --> Position Vector
  */
-void EmptyMatrix(Matrix3D * matrix)
+void EmptyMatrix(Matrix3D *matrix)
 {
     SetVector(0, 0, 0, 0, &matrix->X);
     SetVector(0, 0, 0, 0, &matrix->Y);
@@ -39,7 +56,7 @@ void EmptyMatrix(Matrix3D * matrix)
  * Create a scale matrix to let environment know the scale factor
  * and apply the scaling on the property
  */
-void CreateScaleMatrix(Vector3D v, Matrix3D * target)
+void CreateScaleMatrix(Vector3D v, Matrix3D *target)
 {
     HomogeneousMatrix(target);
     target->X.x = v.x;
@@ -52,7 +69,7 @@ void CreateScaleMatrix(Vector3D v, Matrix3D * target)
  * Create a matrix to change the location of a property
  * This is basically a Homogeneous Matrix except a set position vector
  */
-void CreateTranslationMatrix(Vector3D v, Matrix3D * target)
+void CreateTranslationMatrix(Vector3D v, Matrix3D *target)
 {
     HomogeneousMatrix(target);
     target->W.x = v.x;
@@ -60,9 +77,13 @@ void CreateTranslationMatrix(Vector3D v, Matrix3D * target)
     target->W.z = v.z;
 }
 
-
+/**
+ * CreateScaleAndTranslationMatrix
+ * A combination of functions - CreateScaleMatrix & CreateTranslationMatrix
+ * Creates a Homogeneous Matrix and modifies Scale and Position vectors
+ */
 void CreateScaleAndTranslationMatrix(Vector3D scale, Vector3D offset,
-                                     Matrix3D * target)
+                                     Matrix3D *target)
 {
     HomogeneousMatrix(target);
     target->X.x = scale.x;
@@ -73,8 +94,11 @@ void CreateScaleAndTranslationMatrix(Vector3D scale, Vector3D offset,
     target->W.z = offset.z;
 }
 
-
-void CreateRotationMatrixXSinCos(double sin, double cos, Matrix3D * target)
+/**
+ * CreateRotationMatrixXSinCos
+ * Create a Rotation Matrix to rotate a vector around X Axis by Sin and Cos
+ */
+void CreateRotationMatrixXSinCos(double sin, double cos, Matrix3D *target)
 {
     EmptyMatrix(target);
     target->X.x = 1;
@@ -85,8 +109,11 @@ void CreateRotationMatrixXSinCos(double sin, double cos, Matrix3D * target)
     target->W.w = 1;
 }
 
-
-void CreateRotationMatrixX(double angle, Matrix3D * target)
+/**
+ * CreateRotationMatrixX
+ * Create a Rotation Matrix to rotate a vector around X Axis
+ */
+void CreateRotationMatrixX(double angle, Matrix3D *target)
 {
     double c, s;
     c = cos(angle);
@@ -94,8 +121,11 @@ void CreateRotationMatrixX(double angle, Matrix3D * target)
     CreateRotationMatrixXSinCos(s, c, target);
 }
 
-
-void CreateRotationMatrixYSinCos(double sin, double cos, Matrix3D * target)
+/**
+ * CreateRotationMatrixYSinCos
+ * Create a Rotation Matrix to rotate a vector around Y Axis by Sin and Cos
+ */
+void CreateRotationMatrixYSinCos(double sin, double cos, Matrix3D *target)
 {
     EmptyMatrix(target);
     target->X.x = cos;
@@ -106,8 +136,11 @@ void CreateRotationMatrixYSinCos(double sin, double cos, Matrix3D * target)
     target->W.w = 1;
 }
 
-
-void CreateRotationMatrixY(double angle, Matrix3D * target)
+/**
+ * CreateRotationMatrixY
+ * Create a Rotation Matrix to rotate a vector around Y Axis
+ */
+void CreateRotationMatrixY(double angle, Matrix3D *target)
 {
     double c, s;
     c = cos(angle);
@@ -115,8 +148,11 @@ void CreateRotationMatrixY(double angle, Matrix3D * target)
     CreateRotationMatrixYSinCos(s, c, target);
 }
 
-
-void CreateRotationMatrixZSinCos(double sin, double cos, Matrix3D * target)
+/**
+ * CreateRotationMatrixZSinCos
+ * Create a Rotation Matrix to rotate a vector around Z Axis by Sin and Cos
+ */
+void CreateRotationMatrixZSinCos(double sin, double cos, Matrix3D *target)
 {
     EmptyMatrix(target);
     target->X.x = cos;
@@ -127,8 +163,11 @@ void CreateRotationMatrixZSinCos(double sin, double cos, Matrix3D * target)
     target->W.w = 1;
 }
 
-
-void CreateRotationMatrixZ(double angle, Matrix3D * target)
+/**
+ * CreateRotationMatrixZ
+ * Create a Rotation Matrix to rotate a vector around Z Axis
+ */
+void CreateRotationMatrixZ(double angle, Matrix3D *target)
 {
     double c, s;
     c = cos(angle);
@@ -136,8 +175,11 @@ void CreateRotationMatrixZ(double angle, Matrix3D * target)
     CreateRotationMatrixZSinCos(s, c, target);
 }
 
-
-void CreateRotationMatrix(Vector3D axis, double angle, Matrix3D * target)
+/**
+ * CreateRotationMatrix
+ * Create Rotation Matrix around a given axis Vector by a given angle
+ */
+void CreateRotationMatrix(Vector3D axis, double angle, Matrix3D *target)
 {
     double cosine, sine, one_minus_cos;
     sine = sin(angle);
@@ -166,45 +208,51 @@ void CreateRotationMatrix(Vector3D axis, double angle, Matrix3D * target)
     target->W.w = 1;
 }
 
-
-void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D * target)
+/**
+ * MultiplyMatrix
+ * Multiply two 4x4 matrices.
+ */
+void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D *target)
 {
-  target->X.x = (m1.X.x * m2.X.x + m1.X.y * m2.Y.x +
-                    m1.X.z * m2.Z.x + m1.X.w * m2.W.x);
-  target->X.y = (m1.X.x * m2.X.y + m1.X.y * m2.Y.y +
-                    m1.X.z * m2.Z.y + m1.X.w * m2.W.y);
-  target->X.z = (m1.X.x * m2.X.z + m1.X.y * m2.Y.z +
-                    m1.X.z * m2.Z.z + m1.X.w * m2.W.z);
-  target->X.w = (m1.X.x * m2.X.w + m1.X.y * m2.Y.w +
-                    m1.X.z * m2.Z.w + m1.X.w * m2.W.w);
-  target->Y.x = (m1.Y.x * m2.X.x + m1.Y.y * m2.Y.x +
+    target->X.x = (m1.X.x * m2.X.x + m1.X.y * m2.Y.x +
+                   m1.X.z * m2.Z.x + m1.X.w * m2.W.x);
+    target->X.y = (m1.X.x * m2.X.y + m1.X.y * m2.Y.y +
+                   m1.X.z * m2.Z.y + m1.X.w * m2.W.y);
+    target->X.z = (m1.X.x * m2.X.z + m1.X.y * m2.Y.z +
+                   m1.X.z * m2.Z.z + m1.X.w * m2.W.z);
+    target->X.w = (m1.X.x * m2.X.w + m1.X.y * m2.Y.w +
+                   m1.X.z * m2.Z.w + m1.X.w * m2.W.w);
+    target->Y.x = (m1.Y.x * m2.X.x + m1.Y.y * m2.Y.x +
                    m1.Y.z * m2.Z.x + m1.Y.w * m2.W.x);
-  target->Y.y = (m1.Y.x * m2.X.y + m1.Y.y * m2.Y.y +
+    target->Y.y = (m1.Y.x * m2.X.y + m1.Y.y * m2.Y.y +
                    m1.Y.z * m2.Z.y + m1.Y.w * m2.W.y);
-  target->Y.z = (m1.Y.x * m2.X.z + m1.Y.y * m2.Y.z +
+    target->Y.z = (m1.Y.x * m2.X.z + m1.Y.y * m2.Y.z +
                    m1.Y.z * m2.Z.z + m1.Y.w * m2.W.z);
-  target->Y.w = (m1.Y.x * m2.X.w + m1.Y.y * m2.Y.w +
+    target->Y.w = (m1.Y.x * m2.X.w + m1.Y.y * m2.Y.w +
                    m1.Y.z * m2.Z.w + m1.Y.w * m2.W.w);
-  target->Z.x = (m1.Z.x * m2.X.x + m1.Z.y * m2.Y.x +
-                  m1.Z.z * m2.Z.x + m1.Z.w * m2.W.x);
-  target->Z.y = (m1.Z.x * m2.X.y + m1.Z.y * m2.Y.y +
-                  m1.Z.z * m2.Z.y + m1.Z.w * m2.W.y);
-  target->Z.z = (m1.Z.x * m2.X.z + m1.Z.y * m2.Y.z +
-                  m1.Z.z * m2.Z.z + m1.Z.w * m2.W.z);
-  target->Z.w = (m1.Z.x * m2.X.w + m1.Z.y * m2.Y.w +
-                  m1.Z.z * m2.Z.w + m1.Z.w * m2.W.w);
-  target->W.x = (m1.W.x * m2.X.x + m1.W.y * m2.Y.x +
+    target->Z.x = (m1.Z.x * m2.X.x + m1.Z.y * m2.Y.x +
+                   m1.Z.z * m2.Z.x + m1.Z.w * m2.W.x);
+    target->Z.y = (m1.Z.x * m2.X.y + m1.Z.y * m2.Y.y +
+                   m1.Z.z * m2.Z.y + m1.Z.w * m2.W.y);
+    target->Z.z = (m1.Z.x * m2.X.z + m1.Z.y * m2.Y.z +
+                   m1.Z.z * m2.Z.z + m1.Z.w * m2.W.z);
+    target->Z.w = (m1.Z.x * m2.X.w + m1.Z.y * m2.Y.w +
+                   m1.Z.z * m2.Z.w + m1.Z.w * m2.W.w);
+    target->W.x = (m1.W.x * m2.X.x + m1.W.y * m2.Y.x +
                    m1.W.z * m2.Z.x + m1.W.w * m2.W.x);
-  target->W.y = (m1.W.x * m2.X.y + m1.W.y * m2.Y.y +
+    target->W.y = (m1.W.x * m2.X.y + m1.W.y * m2.Y.y +
                    m1.W.z * m2.Z.y + m1.W.w * m2.W.y);
-  target->W.z = (m1.W.x * m2.X.z + m1.W.y * m2.Y.z +
+    target->W.z = (m1.W.x * m2.X.z + m1.W.y * m2.Y.z +
                    m1.W.z * m2.Z.z + m1.W.w * m2.W.z);
-  target->W.w = (m1.W.x * m2.X.w + m1.W.y * m2.Y.w +
-                   m1.W.z * m2.Z.w +m1.W.w * m2.W.w);
+    target->W.w = (m1.W.x * m2.X.w + m1.W.y * m2.Y.w +
+                   m1.W.z * m2.Z.w + m1.W.w * m2.W.w);
 }
 
-
-void VectorTransform(Matrix3D matrix, Vector3D * target)
+/**
+ * VectorTransform
+ * Vector Transform for given matrix
+ */
+void VectorTransform(Matrix3D matrix, Vector3D *target)
 {
     Vector3D org;
     org.x = target->x;
@@ -216,7 +264,11 @@ void VectorTransform(Matrix3D matrix, Vector3D * target)
     target->w = org.x * matrix.X.w + org.y * matrix.Y.w + org.z * matrix.Z.w + org.w * matrix.W.w;
 }
 
-
+/**
+ * MatrixDeterminant
+ * Calculate the scaling factor of the linear transformation described by the 
+ * matrix. (https://en.wikipedia.org/wiki/Determinant)
+ */
 double MatrixDeterminant(Matrix3D matrix)
 {
     double a, b, c, d;
@@ -235,17 +287,24 @@ double MatrixDeterminant(Matrix3D matrix)
     return a - b + c - d;
 }
 
-
+/**
+ * MatrixDetInternal
+ * Calculate partial Determinant for MatrixDeterminant function
+ */
 double MatrixDetInternal(double a1, double a2, double a3, double b1,
                          double b2, double b3, double c1, double c2,
                          double c3)
 {
-    return a1 * (b2 * c3 - b3 * c2) - b1 * (a2 * c3 - a3 * c2) + c1 *
-        (a2 * b3 - a3 * b2);
+    return a1 * (b2 * c3 - b3 * c2) - b1 * (a2 * c3 - a3 * c2) + c1 * (a2 * b3 - a3 * b2);
 }
 
-
-void AdjointMatrix(Matrix3D * matrix)
+/**
+ * AdjointMatrix
+ * The adjoint of a matrix A is the transpose of the cofactor matrix of A. 
+ * It is denoted by adj A .
+ * https://www.varsitytutors.com/hotmath/hotmath_help/topics/adjoint-of-a-matrix
+ */
+void AdjointMatrix(Matrix3D *matrix)
 {
     double a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
     a1 = matrix->X.x;
@@ -289,8 +348,11 @@ void AdjointMatrix(Matrix3D * matrix)
     matrix->W.w = MatrixDetInternal(a1, a2, a3, b1, b2, b3, c1, c2, c3);
 }
 
-
-void ScaleMatrix(Matrix3D * target, double factor)
+/**
+ * ScaleMatrix
+ * Scale a matrix by given factor.
+ */
+void ScaleMatrix(Matrix3D *target, double factor)
 {
     ScaleVector(&target->X, factor);
     ScaleVector(&target->Y, factor);
@@ -298,43 +360,55 @@ void ScaleMatrix(Matrix3D * target, double factor)
     ScaleVector(&target->W, factor);
 }
 
-
+/**
+ * PrintMatrix
+ * A simple printf wrapper for debugging
+ */
 void PrintMatrix(Matrix3D matrix)
 {
     printf("X: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.X.x,
-                                                       matrix.X.y,
-                                                       matrix.X.z,
-                                                       matrix.X.z);
+           matrix.X.y,
+           matrix.X.z,
+           matrix.X.z);
     printf("Y: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.Y.x,
-                                                       matrix.Y.y,
-                                                       matrix.Y.z,
-                                                       matrix.Y.z);
+           matrix.Y.y,
+           matrix.Y.z,
+           matrix.Y.z);
     printf("Z: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.Z.x,
-                                                       matrix.Z.y,
-                                                       matrix.Z.z,
-                                                       matrix.Z.w);
+           matrix.Z.y,
+           matrix.Z.z,
+           matrix.Z.w);
     printf("W: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.W.x,
-                                                       matrix.W.y,
-                                                       matrix.W.z,
-                                                       matrix.W.w);
+           matrix.W.y,
+           matrix.W.z,
+           matrix.W.w);
 }
 
-
-void InvertMatrix(Matrix3D * matrix)
+/**
+ * InvertMatrix
+ * Invert the given matrix
+ */
+void InvertMatrix(Matrix3D *matrix)
 {
     double det;
     det = MatrixDeterminant(*matrix);
-    if(fabs(det) < EPSILON)
+    if (fabs(det) < EPSILON)
     {
         HomogeneousMatrix(matrix);
-    }else{
+    }
+    else
+    {
         AdjointMatrix(matrix);
         ScaleMatrix(matrix, 1.0 / det);
     }
 }
 
-
-void TransposeMatrix(Matrix3D * matrix)
+/**
+ * TransposeMatrix
+ * The transpose of a matrix is an operator which flips a matrix over its
+ * diagonal. (https://en.wikipedia.org/wiki/Transpose)
+ */
+void TransposeMatrix(Matrix3D *matrix)
 {
     double f;
     f = matrix->X.y;
@@ -356,10 +430,13 @@ void TransposeMatrix(Matrix3D * matrix)
     matrix->W.z = f;
 }
 
-
+/**
+ * LookAtMatrix
+ * Create a look at matrix to position a camera
+ */
 void LookAtMatrix(Vector3D eye,
                   Vector3D target,
-                  Vector3D up, Matrix3D * matrix)
+                  Vector3D up, Matrix3D *matrix)
 {
     Vector3D x_axis, y_axis, z_axis;
     SubVector(eye, target, &z_axis);
