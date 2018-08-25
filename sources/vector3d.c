@@ -36,7 +36,7 @@ void SubVector(Vector3D p1, Vector3D p2, Vector3D *target)
     target->z = p1.z - p2.z;
 }
 
-void ScaleVector(Vector3D *target, double factor)
+void ScaleVector(Vector3D *target, float factor)
 {
     target->x *= factor;
     target->y *= factor;
@@ -53,8 +53,8 @@ void CrossProduct(Vector3D v1, Vector3D v2, Vector3D *target)
 
 void NormalizeVector(Vector3D *target)
 {
-    double invlen;
-    double vn;
+    float invlen;
+    float vn;
     vn = VectorNorm(*target);
     if (vn != 0)
     {
@@ -75,16 +75,16 @@ void DivideVector(Vector3D *vector, Vector3D divider)
 
 void PerpendicularVector(Vector3D v1, Vector3D v2, Vector3D *target)
 {
-    double dot = DotProduct(v1, v2);
+    float dot = DotProduct(v1, v2);
     target->x = v1.x - dot * v2.x;
     target->y = v1.y - dot * v2.y;
     target->z = v1.z - dot * v2.z;
 }
 
-void RotateAroundX(Vector3D *target, double angle)
+void RotateAroundX(Vector3D *target, float angle)
 {
     Vector3D org;
-    double s, c;
+    float s, c;
     s = sin(angle);
     c = cos(angle);
     org.x = target->x;
@@ -94,10 +94,10 @@ void RotateAroundX(Vector3D *target, double angle)
     target->z = c * org.z - s * org.y;
 }
 
-void RotateAroundY(Vector3D *target, double angle)
+void RotateAroundY(Vector3D *target, float angle)
 {
     Vector3D org;
-    double s, c;
+    float s, c;
     s = sin(angle);
     c = cos(angle);
     org.x = target->x;
@@ -107,10 +107,10 @@ void RotateAroundY(Vector3D *target, double angle)
     target->z = c * org.z - s * org.x;
 }
 
-void RotateAroundZ(Vector3D *target, double angle)
+void RotateAroundZ(Vector3D *target, float angle)
 {
     Vector3D org;
-    double s, c;
+    float s, c;
     s = sin(angle);
     c = cos(angle);
     org.x = target->x;
@@ -120,7 +120,7 @@ void RotateAroundZ(Vector3D *target, double angle)
     target->y = c * org.y - s * org.x;
 }
 
-void SetVector(double x, double y, double z, double w, Vector3D *target)
+void SetVector(float x, float y, float z, float w, Vector3D *target)
 {
     target->x = x;
     target->y = y;
@@ -128,31 +128,31 @@ void SetVector(double x, double y, double z, double w, Vector3D *target)
     target->w = w;
 }
 
-double VectorLength(Vector3D vector)
+float VectorLength(Vector3D vector)
 {
     return sqrt((vector.x * vector.x) +
                 (vector.y * vector.y) +
                 (vector.z * vector.z));
 }
 
-double DotProduct(Vector3D v1, Vector3D v2)
+float DotProduct(Vector3D v1, Vector3D v2)
 {
     return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z + v2.z);
 }
 
-double VectorNorm(Vector3D vector)
+float VectorNorm(Vector3D vector)
 {
     return vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
 }
 
-double VectorDistance(Vector3D v1, Vector3D v2)
+float VectorDistance(Vector3D v1, Vector3D v2)
 {
     return sqrt(pow(v2.x - v1.x, 2) +
                 pow(v2.y - v1.y, 2) +
                 pow(v2.z - v1.z, 2));
 }
 
-double rsqrt(double n)
+float rsqrt(float n)
 {
     return 1 / sqrt(n);
 }

@@ -26,29 +26,29 @@
 
 typedef struct _Vector3d
 {
-    double x, y, z, w;
+    float x, y, z, w;
 } Vector3D;
 
 void AddVector(Vector3D p1, Vector3D p2, Vector3D *target);
 void SubVector(Vector3D p1, Vector3D p2, Vector3D *target);
-void ScaleVector(Vector3D *target, double factor);
+void ScaleVector(Vector3D *target, float factor);
 void CrossProduct(Vector3D v1, Vector3D v2, Vector3D *target);
 void NormalizeVector(Vector3D *target);
 void DivideVector(Vector3D *vector, Vector3D divider);
 void PerpendicularVector(Vector3D v1, Vector3D v2, Vector3D *target);
-void RotateAroundX(Vector3D *target, double angle);
-void RotateAroundY(Vector3D *target, double angle);
-void RotateAroundZ(Vector3D *target, double angle);
-void SetVector(double x, double y, double z, double w, Vector3D *target);
+void RotateAroundX(Vector3D *target, float angle);
+void RotateAroundY(Vector3D *target, float angle);
+void RotateAroundZ(Vector3D *target, float angle);
+void SetVector(float x, float y, float z, float w, Vector3D *target);
 void CloneVector(Vector3D from, Vector3D *to);
 void PrintVector(Vector3D v);
 
-double VectorLength(Vector3D vector);
-double DotProduct(Vector3D v1, Vector3D v2);
-double VectorNorm(Vector3D vector);
-double VectorDistance(Vector3D v1, Vector3D v2);
+float VectorLength(Vector3D vector);
+float DotProduct(Vector3D v1, Vector3D v2);
+float VectorNorm(Vector3D vector);
+float VectorDistance(Vector3D v1, Vector3D v2);
 
-double rsqrt(double n);
+float rsqrt(float n);
 int VectorEquals(Vector3D v1, Vector3D v2);
 
 void PlaneNormal(Vector3D v1, Vector3D v2, Vector3D v3, Vector3D *result);

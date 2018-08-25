@@ -6,7 +6,7 @@
 void VectorTest()
 {
     Vector3D a, b, c, result;
-    double d;
+    float d;
     SetVector(0, 0, 0, 1, &result);
     SetVector(5, 5, 5, 1, &a);
     SetVector(3, 4, 2, 1, &b);

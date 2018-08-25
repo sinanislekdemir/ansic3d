@@ -34,26 +34,26 @@ void CreateTranslationMatrix(Vector3D v, Matrix3D *target);
 void CreateScaleAndTranslationMatrix(Vector3D scale, Vector3D offset,
                                      Matrix3D *target);
 
-void CreateRotationMatrixXSinCos(double sin, double cos, Matrix3D *target);
-void CreateRotationMatrixX(double angle, Matrix3D *target);
+void CreateRotationMatrixXSinCos(float sin, float cos, Matrix3D *target);
+void CreateRotationMatrixX(float angle, Matrix3D *target);
 
-void CreateRotationMatrixYSinCos(double sin, double cos, Matrix3D *target);
-void CreateRotationMatrixY(double angle, Matrix3D *target);
+void CreateRotationMatrixYSinCos(float sin, float cos, Matrix3D *target);
+void CreateRotationMatrixY(float angle, Matrix3D *target);
 
-void CreateRotationMatrixZSinCos(double sin, double cos, Matrix3D *target);
-void CreateRotationMatrixZ(double angle, Matrix3D *target);
+void CreateRotationMatrixZSinCos(float sin, float cos, Matrix3D *target);
+void CreateRotationMatrixZ(float angle, Matrix3D *target);
 
-void CreateRotationMatrix(Vector3D axis, double angle, Matrix3D *target);
+void CreateRotationMatrix(Vector3D axis, float angle, Matrix3D *target);
 
 void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D *target);
 void VectorTransform(Matrix3D matrix, Vector3D *target);
 
-double MatrixDeterminant(Matrix3D matrix);
-double MatrixDetInternal(double a1, double a2, double a3, double b1,
-                         double b2, double b3, double c1, double c2,
-                         double c3);
+float MatrixDeterminant(Matrix3D matrix);
+float MatrixDetInternal(float a1, float a2, float a3, float b1,
+                         float b2, float b3, float c1, float c2,
+                         float c3);
 void AdjointMatrix(Matrix3D *matrix);
-void ScaleMatrix(Matrix3D *target, double factor);
+void ScaleMatrix(Matrix3D *target, float factor);
 void PrintMatrix(Matrix3D matrix);
 void InvertMatrix(Matrix3D *matrix);
 void TransposeMatrix(Matrix3D *matrix);

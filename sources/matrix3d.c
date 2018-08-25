@@ -98,7 +98,7 @@ void CreateScaleAndTranslationMatrix(Vector3D scale, Vector3D offset,
  * CreateRotationMatrixXSinCos
  * Create a Rotation Matrix to rotate a vector around X Axis by Sin and Cos
  */
-void CreateRotationMatrixXSinCos(double sin, double cos, Matrix3D *target)
+void CreateRotationMatrixXSinCos(float sin, float cos, Matrix3D *target)
 {
     EmptyMatrix(target);
     target->X.x = 1;
@@ -113,9 +113,9 @@ void CreateRotationMatrixXSinCos(double sin, double cos, Matrix3D *target)
  * CreateRotationMatrixX
  * Create a Rotation Matrix to rotate a vector around X Axis
  */
-void CreateRotationMatrixX(double angle, Matrix3D *target)
+void CreateRotationMatrixX(float angle, Matrix3D *target)
 {
-    double c, s;
+    float c, s;
     c = cos(angle);
     s = sin(angle);
     CreateRotationMatrixXSinCos(s, c, target);
@@ -125,7 +125,7 @@ void CreateRotationMatrixX(double angle, Matrix3D *target)
  * CreateRotationMatrixYSinCos
  * Create a Rotation Matrix to rotate a vector around Y Axis by Sin and Cos
  */
-void CreateRotationMatrixYSinCos(double sin, double cos, Matrix3D *target)
+void CreateRotationMatrixYSinCos(float sin, float cos, Matrix3D *target)
 {
     EmptyMatrix(target);
     target->X.x = cos;
@@ -140,9 +140,9 @@ void CreateRotationMatrixYSinCos(double sin, double cos, Matrix3D *target)
  * CreateRotationMatrixY
  * Create a Rotation Matrix to rotate a vector around Y Axis
  */
-void CreateRotationMatrixY(double angle, Matrix3D *target)
+void CreateRotationMatrixY(float angle, Matrix3D *target)
 {
-    double c, s;
+    float c, s;
     c = cos(angle);
     s = sin(angle);
     CreateRotationMatrixYSinCos(s, c, target);
@@ -152,7 +152,7 @@ void CreateRotationMatrixY(double angle, Matrix3D *target)
  * CreateRotationMatrixZSinCos
  * Create a Rotation Matrix to rotate a vector around Z Axis by Sin and Cos
  */
-void CreateRotationMatrixZSinCos(double sin, double cos, Matrix3D *target)
+void CreateRotationMatrixZSinCos(float sin, float cos, Matrix3D *target)
 {
     EmptyMatrix(target);
     target->X.x = cos;
@@ -167,9 +167,9 @@ void CreateRotationMatrixZSinCos(double sin, double cos, Matrix3D *target)
  * CreateRotationMatrixZ
  * Create a Rotation Matrix to rotate a vector around Z Axis
  */
-void CreateRotationMatrixZ(double angle, Matrix3D *target)
+void CreateRotationMatrixZ(float angle, Matrix3D *target)
 {
-    double c, s;
+    float c, s;
     c = cos(angle);
     s = sin(angle);
     CreateRotationMatrixZSinCos(s, c, target);
@@ -179,9 +179,9 @@ void CreateRotationMatrixZ(double angle, Matrix3D *target)
  * CreateRotationMatrix
  * Create Rotation Matrix around a given axis Vector by a given angle
  */
-void CreateRotationMatrix(Vector3D axis, double angle, Matrix3D *target)
+void CreateRotationMatrix(Vector3D axis, float angle, Matrix3D *target)
 {
-    double cosine, sine, one_minus_cos;
+    float cosine, sine, one_minus_cos;
     sine = sin(angle);
     cosine = cos(angle);
     NormalizeVector(&axis);
@@ -269,9 +269,9 @@ void VectorTransform(Matrix3D matrix, Vector3D *target)
  * Calculate the scaling factor of the linear transformation described by the 
  * matrix. (https://en.wikipedia.org/wiki/Determinant)
  */
-double MatrixDeterminant(Matrix3D matrix)
+float MatrixDeterminant(Matrix3D matrix)
 {
-    double a, b, c, d;
+    float a, b, c, d;
     a = matrix.X.x * MatrixDetInternal(matrix.Y.y, matrix.Z.y, matrix.W.y,
                                        matrix.Y.z, matrix.Z.z, matrix.W.z,
                                        matrix.Y.w, matrix.Z.w, matrix.W.w);
@@ -291,9 +291,9 @@ double MatrixDeterminant(Matrix3D matrix)
  * MatrixDetInternal
  * Calculate partial Determinant for MatrixDeterminant function
  */
-double MatrixDetInternal(double a1, double a2, double a3, double b1,
-                         double b2, double b3, double c1, double c2,
-                         double c3)
+float MatrixDetInternal(float a1, float a2, float a3, float b1,
+                         float b2, float b3, float c1, float c2,
+                         float c3)
 {
     return a1 * (b2 * c3 - b3 * c2) - b1 * (a2 * c3 - a3 * c2) + c1 * (a2 * b3 - a3 * b2);
 }
@@ -306,7 +306,7 @@ double MatrixDetInternal(double a1, double a2, double a3, double b1,
  */
 void AdjointMatrix(Matrix3D *matrix)
 {
-    double a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
+    float a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
     a1 = matrix->X.x;
     b1 = matrix->X.y;
     c1 = matrix->X.z;
@@ -352,7 +352,7 @@ void AdjointMatrix(Matrix3D *matrix)
  * ScaleMatrix
  * Scale a matrix by given factor.
  */
-void ScaleMatrix(Matrix3D *target, double factor)
+void ScaleMatrix(Matrix3D *target, float factor)
 {
     ScaleVector(&target->X, factor);
     ScaleVector(&target->Y, factor);
@@ -390,7 +390,7 @@ void PrintMatrix(Matrix3D matrix)
  */
 void InvertMatrix(Matrix3D *matrix)
 {
-    double det;
+    float det;
     det = MatrixDeterminant(*matrix);
     if (fabs(det) < EPSILON)
     {
@@ -410,7 +410,7 @@ void InvertMatrix(Matrix3D *matrix)
  */
 void TransposeMatrix(Matrix3D *matrix)
 {
-    double f;
+    float f;
     f = matrix->X.y;
     matrix->X.y = matrix->Y.x;
     matrix->Y.x = f;
