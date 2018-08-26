@@ -58,7 +58,7 @@ void NormalizeVector(Vector3D *target)
     vn = VectorNorm(*target);
     if (vn != 0)
     {
-        invlen = rsqrt(vn);
+        invlen = 1 / vn;
         target->x = target->x * invlen;
         target->y = target->y * invlen;
         target->z = target->z * invlen;
@@ -130,19 +130,21 @@ void SetVector(float x, float y, float z, float w, Vector3D *target)
 
 float VectorLength(Vector3D vector)
 {
-    return sqrt((vector.x * vector.x) +
+    return sqrtf((vector.x * vector.x) +
                 (vector.y * vector.y) +
                 (vector.z * vector.z));
 }
 
 float DotProduct(Vector3D v1, Vector3D v2)
 {
-    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z + v2.z);
+    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
 }
 
 float VectorNorm(Vector3D vector)
 {
-    return vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
+    return sqrtf((vector.x * vector.x) + 
+                 (vector.y * vector.y) +
+                 (vector.z * vector.z));
 }
 
 float VectorDistance(Vector3D v1, Vector3D v2)
@@ -159,12 +161,16 @@ float rsqrt(float n)
 
 int VectorEquals(Vector3D v1, Vector3D v2)
 {
-    return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
+    float x, y, z;
+    x = fabsf(v1.x - v2.x);
+    y = fabsf(v1.y - v2.y);
+    z = fabsf(v1.z - v2.z);
+    return (x < PRECISION && y < PRECISION && z < PRECISION);
 }
 
 void PrintVector(Vector3D v)
 {
-    printf("V: %20.4f i %20.4f j %20.4f k %20.4f l\n", v.x, v.y, v.z, v.w);
+    printf("V: %20.10f i %20.10f j %20.10f k %20.10f l\n", v.x, v.y, v.z, v.w);
 }
 
 void PlaneNormal(Vector3D v1, Vector3D v2, Vector3D v3, Vector3D *result)

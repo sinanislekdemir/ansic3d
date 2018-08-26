@@ -28,13 +28,51 @@ typedef struct _VectorList
 {
     Vector3D *vectors;
     unsigned int count;
+    int index, capacity;
 } VectorList;
 
-void InitVectorList(VectorList *list);
+/**
+ * Init the vectorlist.
+ * Vector still can get over this capacity but in each PushVector
+ * it will create a copy and swap the memory. SetCapacity 
+ * pre-allocates a memory upto given vector count.
+ */
+void InitVectorList(VectorList *list, int capacity);
+
+/**
+ * Add a vector to the end of the list
+ * Return count of items in list, 0 if fails
+ */
 int PushVector(Vector3D v, VectorList *list);
-void PopVector(VectorList *list, Vector3D *target);
-void RemoveVectorIndex(VectorList *list, int index);
+
+/**
+ * Pop out the latest item in the list
+ * Return count of items in list, 0 if fails
+ */
+int PopVector(VectorList *list, Vector3D *target);
+
+/**
+ * Remove the vector at given index
+ * Please note that, this is a memory-heavy operation.
+ * Return count of items in list, 0 if fails
+ */
+int RemoveVectorIndex(VectorList *list, int index);
+
+/**
+ * Remove the last element in the vector list
+ */
 void RemoveLastVector(VectorList *list);
+
+/**
+ * Free the vector list
+ */
 void FreeVectorList(VectorList *list);
+
+/**
+ * Trim the leading empty vectors from the list.
+ * Can/should be used before pushing the vector list to video memory
+ * Return count of items in list, 0 if fails
+ */
+int TrimVectorList(VectorList *list);
 
 #endif

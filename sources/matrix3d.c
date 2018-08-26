@@ -18,15 +18,6 @@
 #include <ansic3d/vector3d.h>
 #include <ansic3d/matrix3d.h>
 
-/**
- * HomogeneousMatrix
- * Creates a 4x4 Homogenous matrix to work with OpenGL or other
- * libraries to define the cartesian coordinates and orientation of a point
- *     1 0 0 0 --> Left Vector
- *     0 1 0 0 --> Direction Vector
- *     0 0 1 0 --> Up Vector
- *     0 0 0 1 --> Position Vector
- */
 void HomogeneousMatrix(Matrix3D *matrix)
 {
     SetVector(1, 0, 0, 0, &matrix->X);
@@ -35,14 +26,6 @@ void HomogeneousMatrix(Matrix3D *matrix)
     SetVector(0, 0, 0, 1, &matrix->W);
 }
 
-/**
- * EmptyMatrix
- * Creates a 4x4 empty Matrix
- *     1 0 0 0 --> Left Vector
- *     0 1 0 0 --> Direction Vector
- *     0 0 1 0 --> Up Vector
- *     0 0 0 1 --> Position Vector
- */
 void EmptyMatrix(Matrix3D *matrix)
 {
     SetVector(0, 0, 0, 0, &matrix->X);
@@ -51,11 +34,6 @@ void EmptyMatrix(Matrix3D *matrix)
     SetVector(0, 0, 0, 0, &matrix->W);
 }
 
-/**
- * CreateScaleMatrix
- * Create a scale matrix to let environment know the scale factor
- * and apply the scaling on the property
- */
 void CreateScaleMatrix(Vector3D v, Matrix3D *target)
 {
     HomogeneousMatrix(target);
@@ -64,11 +42,6 @@ void CreateScaleMatrix(Vector3D v, Matrix3D *target)
     target->Z.z = v.z;
 }
 
-/**
- * CreateTranslationMatrix
- * Create a matrix to change the location of a property
- * This is basically a Homogeneous Matrix except a set position vector
- */
 void CreateTranslationMatrix(Vector3D v, Matrix3D *target)
 {
     HomogeneousMatrix(target);
@@ -77,27 +50,18 @@ void CreateTranslationMatrix(Vector3D v, Matrix3D *target)
     target->W.z = v.z;
 }
 
-/**
- * CreateScaleAndTranslationMatrix
- * A combination of functions - CreateScaleMatrix & CreateTranslationMatrix
- * Creates a Homogeneous Matrix and modifies Scale and Position vectors
- */
 void CreateScaleAndTranslationMatrix(Vector3D scale, Vector3D offset,
                                      Matrix3D *target)
 {
     HomogeneousMatrix(target);
     target->X.x = scale.x;
-    target->W.x = offset.x;
     target->Y.y = scale.y;
-    target->W.y = offset.y;
     target->Z.z = scale.z;
+    target->W.x = offset.x;
+    target->W.y = offset.y;
     target->W.z = offset.z;
 }
 
-/**
- * CreateRotationMatrixXSinCos
- * Create a Rotation Matrix to rotate a vector around X Axis by Sin and Cos
- */
 void CreateRotationMatrixXSinCos(float sin, float cos, Matrix3D *target)
 {
     EmptyMatrix(target);
@@ -109,22 +73,14 @@ void CreateRotationMatrixXSinCos(float sin, float cos, Matrix3D *target)
     target->W.w = 1;
 }
 
-/**
- * CreateRotationMatrixX
- * Create a Rotation Matrix to rotate a vector around X Axis
- */
 void CreateRotationMatrixX(float angle, Matrix3D *target)
 {
     float c, s;
-    c = cos(angle);
-    s = sin(angle);
+    c = cosf(angle);
+    s = sinf(angle);
     CreateRotationMatrixXSinCos(s, c, target);
 }
 
-/**
- * CreateRotationMatrixYSinCos
- * Create a Rotation Matrix to rotate a vector around Y Axis by Sin and Cos
- */
 void CreateRotationMatrixYSinCos(float sin, float cos, Matrix3D *target)
 {
     EmptyMatrix(target);
@@ -136,22 +92,14 @@ void CreateRotationMatrixYSinCos(float sin, float cos, Matrix3D *target)
     target->W.w = 1;
 }
 
-/**
- * CreateRotationMatrixY
- * Create a Rotation Matrix to rotate a vector around Y Axis
- */
 void CreateRotationMatrixY(float angle, Matrix3D *target)
 {
     float c, s;
-    c = cos(angle);
-    s = sin(angle);
+    c = cosf(angle);
+    s = sinf(angle);
     CreateRotationMatrixYSinCos(s, c, target);
 }
 
-/**
- * CreateRotationMatrixZSinCos
- * Create a Rotation Matrix to rotate a vector around Z Axis by Sin and Cos
- */
 void CreateRotationMatrixZSinCos(float sin, float cos, Matrix3D *target)
 {
     EmptyMatrix(target);
@@ -163,27 +111,19 @@ void CreateRotationMatrixZSinCos(float sin, float cos, Matrix3D *target)
     target->W.w = 1;
 }
 
-/**
- * CreateRotationMatrixZ
- * Create a Rotation Matrix to rotate a vector around Z Axis
- */
 void CreateRotationMatrixZ(float angle, Matrix3D *target)
 {
     float c, s;
-    c = cos(angle);
-    s = sin(angle);
+    c = cosf(angle);
+    s = sinf(angle);
     CreateRotationMatrixZSinCos(s, c, target);
 }
 
-/**
- * CreateRotationMatrix
- * Create Rotation Matrix around a given axis Vector by a given angle
- */
 void CreateRotationMatrix(Vector3D axis, float angle, Matrix3D *target)
 {
     float cosine, sine, one_minus_cos;
-    sine = sin(angle);
-    cosine = cos(angle);
+    sine = sinf(angle);
+    cosine = cosf(angle);
     NormalizeVector(&axis);
     one_minus_cos = 1 - cosine;
 
@@ -208,10 +148,6 @@ void CreateRotationMatrix(Vector3D axis, float angle, Matrix3D *target)
     target->W.w = 1;
 }
 
-/**
- * MultiplyMatrix
- * Multiply two 4x4 matrices.
- */
 void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D *target)
 {
     target->X.x = (m1.X.x * m2.X.x + m1.X.y * m2.Y.x +
@@ -248,10 +184,6 @@ void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D *target)
                    m1.W.z * m2.Z.w + m1.W.w * m2.W.w);
 }
 
-/**
- * VectorTransform
- * Vector Transform for given matrix
- */
 void VectorTransform(Matrix3D matrix, Vector3D *target)
 {
     Vector3D org;
@@ -264,11 +196,6 @@ void VectorTransform(Matrix3D matrix, Vector3D *target)
     target->w = org.x * matrix.X.w + org.y * matrix.Y.w + org.z * matrix.Z.w + org.w * matrix.W.w;
 }
 
-/**
- * MatrixDeterminant
- * Calculate the scaling factor of the linear transformation described by the 
- * matrix. (https://en.wikipedia.org/wiki/Determinant)
- */
 float MatrixDeterminant(Matrix3D matrix)
 {
     float a, b, c, d;
@@ -287,23 +214,13 @@ float MatrixDeterminant(Matrix3D matrix)
     return a - b + c - d;
 }
 
-/**
- * MatrixDetInternal
- * Calculate partial Determinant for MatrixDeterminant function
- */
 float MatrixDetInternal(float a1, float a2, float a3, float b1,
-                         float b2, float b3, float c1, float c2,
-                         float c3)
+                        float b2, float b3, float c1, float c2,
+                        float c3)
 {
-    return a1 * (b2 * c3 - b3 * c2) - b1 * (a2 * c3 - a3 * c2) + c1 * (a2 * b3 - a3 * b2);
+    return (a1 * ((b2 * c3) - (b3 * c2))) - (b1 * ((a2 * c3) - (a3 * c2))) + (c1 * ((a2 * b3) - (a3 * b2)));
 }
 
-/**
- * AdjointMatrix
- * The adjoint of a matrix A is the transpose of the cofactor matrix of A. 
- * It is denoted by adj A .
- * https://www.varsitytutors.com/hotmath/hotmath_help/topics/adjoint-of-a-matrix
- */
 void AdjointMatrix(Matrix3D *matrix)
 {
     float a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4;
@@ -348,10 +265,6 @@ void AdjointMatrix(Matrix3D *matrix)
     matrix->W.w = MatrixDetInternal(a1, a2, a3, b1, b2, b3, c1, c2, c3);
 }
 
-/**
- * ScaleMatrix
- * Scale a matrix by given factor.
- */
 void ScaleMatrix(Matrix3D *target, float factor)
 {
     ScaleVector(&target->X, factor);
@@ -360,34 +273,26 @@ void ScaleMatrix(Matrix3D *target, float factor)
     ScaleVector(&target->W, factor);
 }
 
-/**
- * PrintMatrix
- * A simple printf wrapper for debugging
- */
 void PrintMatrix(Matrix3D matrix)
 {
-    printf("X: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.X.x,
+    printf("X: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.X.x,
            matrix.X.y,
            matrix.X.z,
            matrix.X.z);
-    printf("Y: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.Y.x,
+    printf("Y: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.Y.x,
            matrix.Y.y,
            matrix.Y.z,
            matrix.Y.z);
-    printf("Z: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.Z.x,
+    printf("Z: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.Z.x,
            matrix.Z.y,
            matrix.Z.z,
            matrix.Z.w);
-    printf("W: %20.4f i %20.4f j %20.4f k %20.4f l\n", matrix.W.x,
+    printf("W: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.W.x,
            matrix.W.y,
            matrix.W.z,
            matrix.W.w);
 }
 
-/**
- * InvertMatrix
- * Invert the given matrix
- */
 void InvertMatrix(Matrix3D *matrix)
 {
     float det;
@@ -403,11 +308,6 @@ void InvertMatrix(Matrix3D *matrix)
     }
 }
 
-/**
- * TransposeMatrix
- * The transpose of a matrix is an operator which flips a matrix over its
- * diagonal. (https://en.wikipedia.org/wiki/Transpose)
- */
 void TransposeMatrix(Matrix3D *matrix)
 {
     float f;
@@ -430,10 +330,6 @@ void TransposeMatrix(Matrix3D *matrix)
     matrix->W.z = f;
 }
 
-/**
- * LookAtMatrix
- * Create a look at matrix to position a camera
- */
 void LookAtMatrix(Vector3D eye,
                   Vector3D target,
                   Vector3D up, Matrix3D *matrix)
@@ -448,4 +344,10 @@ void LookAtMatrix(Vector3D eye,
     CloneVector(y_axis, &matrix->Y);
     CloneVector(z_axis, &matrix->Z);
     SetVector(eye.x, eye.y, eye.z, 1, &matrix->W);
+}
+
+int MatrixEquals(Matrix3D m1, Matrix3D m2)
+{
+    return VectorEquals(m1.X, m2.X) && VectorEquals(m1.Y, m2.Y) &&
+           VectorEquals(m1.Z, m2.Z) && VectorEquals(m1.W, m2.W);
 }
