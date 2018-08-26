@@ -32,6 +32,53 @@ Or just run to compule and install the library and run the tests.
     ./build.sh
 
 
+## Tests
+
+    $ bbee --i=test.json
+    Building using gcc
+    Collecting files
+    Building ./tests/test.c
+    Running build/test
+    TestCloneVector [OK]
+    TestAddVector [OK]
+    TestSubVector [OK]
+    TestScaleVector [OK]
+    TestCrossProduct [OK]
+    TestNormalizeVector [OK]
+    TestDivideVector [OK]
+    TestPerpendicularVector [OK]
+    TestRotateAroundX [OK]
+    TestRotateAroundY [OK]
+    TestRotateAroundZ [OK]
+    TestVectorLength [OK]
+    TestDotProduct [OK]
+    TestVectorNorm [OK]
+    TestVectorDistance [OK]
+    TestPlaceNormal [OK]
+    TestInitVectorList [OK]
+    TestPushVector [OK]
+    TestFreeVectorList [OK]
+    TestPopVector [OK]
+    TestRemoveLastVector [OK]
+    TestTrimVectorList [OK]
+    TestHomogeneousMatrix [OK]
+    TestCreateScaleMatrix [OK]
+    TestCreateTranslationMatrix [OK]
+    TestCreateScaleAndTranslationMatrix [OK]
+    TestCreateRotationMatrixX [OK]
+    TestCreateRotationMatrixY [OK]
+    TestCreateRotationMatrixZ [OK]
+    TestCreateRotationMatrix [OK]
+    TestMultiplyMatrix [OK]
+    TestVectorTransform [OK]
+    TestMatrixDeterminant [OK]
+    TestAdjointMatrix [OK]
+    TestScaleMatrix [OK]
+    TestInvertMatrix [OK]
+    TestTransposeMatrix [OK]
+    TestLookAtMatrix [OK]
+
+
 ## Creator
 
 sinan islekdemir | sinan@islekdemir.com 
