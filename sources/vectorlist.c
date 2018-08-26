@@ -69,7 +69,6 @@ void FreeVectorList(VectorList *list)
 
 int PopVector(VectorList *list, Vector3D *target)
 {
-    Vector3D *temp;
     if (list->count == 0)
     {
         return 0;
@@ -93,8 +92,8 @@ void RemoveLastVector(VectorList *list)
 
 int RemoveVectorIndex(VectorList *list, int index)
 {
-    unsigned int i, j;
-    if (list->count <= index)
+    int i, j;
+    if ((int) list->count <= index)
     {
         return 0;
     }

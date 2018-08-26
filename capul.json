@@ -1,6 +1,6 @@
 {
     "builder": "gcc", 
-    "cflags": "-g", 
+    "cflags": "-g -Wall -W",
     "debug": true, 
     "includes": [
         "./includes"

@@ -28,7 +28,8 @@ typedef struct _VectorList
 {
     Vector3D *vectors;
     unsigned int count;
-    int index, capacity;
+    unsigned int capacity;
+    int index;
 } VectorList;
 
 /**

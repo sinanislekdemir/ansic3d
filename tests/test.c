@@ -77,7 +77,7 @@ int TestNormalizeVector()
 
 int TestDivideVector()
 {
-    Vector3D vector, divider, expect, target;
+    Vector3D vector, divider, expect;
     SetVector(1, 1, 1, 1, &vector);
     SetVector(2, 2, 2, 1, &divider);
     SetVector(0.5, 0.5, 0.5, 1, &expect);
