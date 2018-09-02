@@ -1,0 +1,6 @@
+dist: trusty
+before_install:
+- sudo apt-get install -qq python
+- pip install bbee
+language: c
+script: ./bbee && ./bbee --i=test.json
