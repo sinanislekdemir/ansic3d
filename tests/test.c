@@ -194,6 +194,7 @@ int TestPushVector()
 {
     VectorList list;
     Vector3D vector;
+    unsigned int i;
     SetVector(1, 2, 3, 1, &vector);
     InitVectorList(&list, 10);
     PushVector(vector, &list);
@@ -210,7 +211,7 @@ int TestPushVector()
         return 0;
     }
     // Exceed the capacity
-    for (unsigned int i = 0; i < 15; i++)
+    for (i = 0; i < 15; i++)
     {
         PushVector(vector, &list);
     }
@@ -588,11 +589,12 @@ int TestLookAtMatrix()
 int TestCastFloat()
 {
     Matrix3D m;
+    unsigned int i;
     float f[16] = {0};
     float expect[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
     HomogeneousMatrix(&m);
     CastFloat(&m, f);
-    for (unsigned int i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++)
     {
         if (fabsf(expect[i] - f[i]) > PRECISION)
         {

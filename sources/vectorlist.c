@@ -120,6 +120,7 @@ int RemoveVectorIndex(VectorList *list, int index)
 
 int TrimVectorList(VectorList *list)
 {
+    unsigned int i;
     Vector3D *temp = malloc((list->count) * sizeof(Vector3D));
     if (temp == NULL)
     {
@@ -127,7 +128,7 @@ int TrimVectorList(VectorList *list)
     }
     list->capacity = list->count;
     list->index = list->count - 1;
-    for (unsigned int i = 0; i < list->count; i++)
+    for (i = 0; i < list->count; i++)
     {
         CloneVector(list->vectors[i], &temp[i]);
     }
