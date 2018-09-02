@@ -351,3 +351,23 @@ int MatrixEquals(Matrix3D m1, Matrix3D m2)
     return VectorEquals(m1.X, m2.X) && VectorEquals(m1.Y, m2.Y) &&
            VectorEquals(m1.Z, m2.Z) && VectorEquals(m1.W, m2.W);
 }
+
+void CastFloat(Matrix3D *m, float *f)
+{
+    f[0] = m->X.x;
+    f[1] = m->X.y;
+    f[2] = m->X.z;
+    f[3] = m->X.w;
+    f[4] = m->Y.x;
+    f[5] = m->Y.y;
+    f[6] = m->Y.z;
+    f[7] = m->Y.w;
+    f[8] = m->Z.x;
+    f[9] = m->Z.y;
+    f[10] = m->Z.z;
+    f[11] = m->Z.w;
+    f[12] = m->W.x;
+    f[13] = m->W.y;
+    f[14] = m->W.z;
+    f[15] = m->W.w;
+}

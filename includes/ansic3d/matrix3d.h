@@ -19,6 +19,7 @@
 #define MATRIX3D_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ansic3d/vector3d.h>
 #define EPSILON 1E-40
 
@@ -162,5 +163,14 @@ void LookAtMatrix(Vector3D eye,
  * Check if two matrixes are equal
  */
 int MatrixEquals(Matrix3D m1, Matrix3D m2);
+
+/**
+ * Convert matrix to Float array [4][4]
+ * Compilers are "allowed" to add padding on structs therefore
+ * casting Matrix3D struct to Float* might result to undefined behaviour.
+ * Important!!
+ * Target float MUST BE initialized with 16 size before this stage.
+ */
+void CastFloat(Matrix3D *m, float *f);
 
 #endif

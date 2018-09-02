@@ -585,6 +585,23 @@ int TestLookAtMatrix()
     return MatrixEquals(camera, expect);
 }
 
+int TestCastFloat()
+{
+    Matrix3D m;
+    float f[16] = {0};
+    float expect[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+    HomogeneousMatrix(&m);
+    CastFloat(&m, f);
+    for (unsigned int i = 0; i < 16; i++)
+    {
+        if (fabsf(expect[i] - f[i]) > PRECISION)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int main()
 {
     if (TestCloneVector())
@@ -894,5 +911,13 @@ int main()
     else
     {
         printFAIL("TestLookAtMatrix");
+    }
+    if (TestCastFloat())
+    {
+        printOK("TestCastFloat");
+    }
+    else
+    {
+        printFAIL("TestCastFloat");
     }
 }
