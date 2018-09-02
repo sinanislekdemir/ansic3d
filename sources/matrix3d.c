@@ -148,69 +148,69 @@ void CreateRotationMatrix(Vector3D axis, float angle, Matrix3D *target)
     target->W.w = 1;
 }
 
-void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D *target)
+void MultiplyMatrix(Matrix3D *m1, Matrix3D *m2, Matrix3D *target)
 {
-    target->X.x = (m1.X.x * m2.X.x + m1.X.y * m2.Y.x +
-                   m1.X.z * m2.Z.x + m1.X.w * m2.W.x);
-    target->X.y = (m1.X.x * m2.X.y + m1.X.y * m2.Y.y +
-                   m1.X.z * m2.Z.y + m1.X.w * m2.W.y);
-    target->X.z = (m1.X.x * m2.X.z + m1.X.y * m2.Y.z +
-                   m1.X.z * m2.Z.z + m1.X.w * m2.W.z);
-    target->X.w = (m1.X.x * m2.X.w + m1.X.y * m2.Y.w +
-                   m1.X.z * m2.Z.w + m1.X.w * m2.W.w);
-    target->Y.x = (m1.Y.x * m2.X.x + m1.Y.y * m2.Y.x +
-                   m1.Y.z * m2.Z.x + m1.Y.w * m2.W.x);
-    target->Y.y = (m1.Y.x * m2.X.y + m1.Y.y * m2.Y.y +
-                   m1.Y.z * m2.Z.y + m1.Y.w * m2.W.y);
-    target->Y.z = (m1.Y.x * m2.X.z + m1.Y.y * m2.Y.z +
-                   m1.Y.z * m2.Z.z + m1.Y.w * m2.W.z);
-    target->Y.w = (m1.Y.x * m2.X.w + m1.Y.y * m2.Y.w +
-                   m1.Y.z * m2.Z.w + m1.Y.w * m2.W.w);
-    target->Z.x = (m1.Z.x * m2.X.x + m1.Z.y * m2.Y.x +
-                   m1.Z.z * m2.Z.x + m1.Z.w * m2.W.x);
-    target->Z.y = (m1.Z.x * m2.X.y + m1.Z.y * m2.Y.y +
-                   m1.Z.z * m2.Z.y + m1.Z.w * m2.W.y);
-    target->Z.z = (m1.Z.x * m2.X.z + m1.Z.y * m2.Y.z +
-                   m1.Z.z * m2.Z.z + m1.Z.w * m2.W.z);
-    target->Z.w = (m1.Z.x * m2.X.w + m1.Z.y * m2.Y.w +
-                   m1.Z.z * m2.Z.w + m1.Z.w * m2.W.w);
-    target->W.x = (m1.W.x * m2.X.x + m1.W.y * m2.Y.x +
-                   m1.W.z * m2.Z.x + m1.W.w * m2.W.x);
-    target->W.y = (m1.W.x * m2.X.y + m1.W.y * m2.Y.y +
-                   m1.W.z * m2.Z.y + m1.W.w * m2.W.y);
-    target->W.z = (m1.W.x * m2.X.z + m1.W.y * m2.Y.z +
-                   m1.W.z * m2.Z.z + m1.W.w * m2.W.z);
-    target->W.w = (m1.W.x * m2.X.w + m1.W.y * m2.Y.w +
-                   m1.W.z * m2.Z.w + m1.W.w * m2.W.w);
+    target->X.x = (m1->X.x * m2->X.x + m1->X.y * m2->Y.x +
+                   m1->X.z * m2->Z.x + m1->X.w * m2->W.x);
+    target->X.y = (m1->X.x * m2->X.y + m1->X.y * m2->Y.y +
+                   m1->X.z * m2->Z.y + m1->X.w * m2->W.y);
+    target->X.z = (m1->X.x * m2->X.z + m1->X.y * m2->Y.z +
+                   m1->X.z * m2->Z.z + m1->X.w * m2->W.z);
+    target->X.w = (m1->X.x * m2->X.w + m1->X.y * m2->Y.w +
+                   m1->X.z * m2->Z.w + m1->X.w * m2->W.w);
+    target->Y.x = (m1->Y.x * m2->X.x + m1->Y.y * m2->Y.x +
+                   m1->Y.z * m2->Z.x + m1->Y.w * m2->W.x);
+    target->Y.y = (m1->Y.x * m2->X.y + m1->Y.y * m2->Y.y +
+                   m1->Y.z * m2->Z.y + m1->Y.w * m2->W.y);
+    target->Y.z = (m1->Y.x * m2->X.z + m1->Y.y * m2->Y.z +
+                   m1->Y.z * m2->Z.z + m1->Y.w * m2->W.z);
+    target->Y.w = (m1->Y.x * m2->X.w + m1->Y.y * m2->Y.w +
+                   m1->Y.z * m2->Z.w + m1->Y.w * m2->W.w);
+    target->Z.x = (m1->Z.x * m2->X.x + m1->Z.y * m2->Y.x +
+                   m1->Z.z * m2->Z.x + m1->Z.w * m2->W.x);
+    target->Z.y = (m1->Z.x * m2->X.y + m1->Z.y * m2->Y.y +
+                   m1->Z.z * m2->Z.y + m1->Z.w * m2->W.y);
+    target->Z.z = (m1->Z.x * m2->X.z + m1->Z.y * m2->Y.z +
+                   m1->Z.z * m2->Z.z + m1->Z.w * m2->W.z);
+    target->Z.w = (m1->Z.x * m2->X.w + m1->Z.y * m2->Y.w +
+                   m1->Z.z * m2->Z.w + m1->Z.w * m2->W.w);
+    target->W.x = (m1->W.x * m2->X.x + m1->W.y * m2->Y.x +
+                   m1->W.z * m2->Z.x + m1->W.w * m2->W.x);
+    target->W.y = (m1->W.x * m2->X.y + m1->W.y * m2->Y.y +
+                   m1->W.z * m2->Z.y + m1->W.w * m2->W.y);
+    target->W.z = (m1->W.x * m2->X.z + m1->W.y * m2->Y.z +
+                   m1->W.z * m2->Z.z + m1->W.w * m2->W.z);
+    target->W.w = (m1->W.x * m2->X.w + m1->W.y * m2->Y.w +
+                   m1->W.z * m2->Z.w + m1->W.w * m2->W.w);
 }
 
-void VectorTransform(Matrix3D matrix, Vector3D *target)
+void VectorTransform(Matrix3D *matrix, Vector3D *target)
 {
     Vector3D org;
     org.x = target->x;
     org.y = target->y;
     org.z = target->z;
-    target->x = org.x * matrix.X.x + org.y * matrix.Y.x + org.z * matrix.Z.x + org.w * matrix.W.x;
-    target->y = org.x * matrix.X.y + org.y * matrix.Y.y + org.z * matrix.Z.y + org.w * matrix.W.y;
-    target->z = org.x * matrix.X.z + org.y * matrix.Y.z + org.z * matrix.Z.z + org.w * matrix.W.z;
-    target->w = org.x * matrix.X.w + org.y * matrix.Y.w + org.z * matrix.Z.w + org.w * matrix.W.w;
+    target->x = org.x * matrix->X.x + org.y * matrix->Y.x + org.z * matrix->Z.x + org.w * matrix->W.x;
+    target->y = org.x * matrix->X.y + org.y * matrix->Y.y + org.z * matrix->Z.y + org.w * matrix->W.y;
+    target->z = org.x * matrix->X.z + org.y * matrix->Y.z + org.z * matrix->Z.z + org.w * matrix->W.z;
+    target->w = org.x * matrix->X.w + org.y * matrix->Y.w + org.z * matrix->Z.w + org.w * matrix->W.w;
 }
 
-float MatrixDeterminant(Matrix3D matrix)
+float MatrixDeterminant(Matrix3D *matrix)
 {
     float a, b, c, d;
-    a = matrix.X.x * MatrixDetInternal(matrix.Y.y, matrix.Z.y, matrix.W.y,
-                                       matrix.Y.z, matrix.Z.z, matrix.W.z,
-                                       matrix.Y.w, matrix.Z.w, matrix.W.w);
-    b = matrix.X.y * MatrixDetInternal(matrix.Y.x, matrix.Z.x, matrix.W.x,
-                                       matrix.Y.z, matrix.Z.z, matrix.W.z,
-                                       matrix.Y.w, matrix.Z.w, matrix.W.w);
-    c = matrix.X.z * MatrixDetInternal(matrix.Y.x, matrix.Z.x, matrix.W.x,
-                                       matrix.Y.y, matrix.Z.y, matrix.W.y,
-                                       matrix.Y.w, matrix.Z.w, matrix.W.w);
-    d = matrix.X.w * MatrixDetInternal(matrix.Y.x, matrix.Z.x, matrix.W.x,
-                                       matrix.Y.y, matrix.Z.y, matrix.W.y,
-                                       matrix.Y.z, matrix.Z.z, matrix.W.z);
+    a = matrix->X.x * MatrixDetInternal(matrix->Y.y, matrix->Z.y, matrix->W.y,
+                                        matrix->Y.z, matrix->Z.z, matrix->W.z,
+                                        matrix->Y.w, matrix->Z.w, matrix->W.w);
+    b = matrix->X.y * MatrixDetInternal(matrix->Y.x, matrix->Z.x, matrix->W.x,
+                                        matrix->Y.z, matrix->Z.z, matrix->W.z,
+                                        matrix->Y.w, matrix->Z.w, matrix->W.w);
+    c = matrix->X.z * MatrixDetInternal(matrix->Y.x, matrix->Z.x, matrix->W.x,
+                                        matrix->Y.y, matrix->Z.y, matrix->W.y,
+                                        matrix->Y.w, matrix->Z.w, matrix->W.w);
+    d = matrix->X.w * MatrixDetInternal(matrix->Y.x, matrix->Z.x, matrix->W.x,
+                                        matrix->Y.y, matrix->Z.y, matrix->W.y,
+                                        matrix->Y.z, matrix->Z.z, matrix->W.z);
     return a - b + c - d;
 }
 
@@ -273,30 +273,30 @@ void ScaleMatrix(Matrix3D *target, float factor)
     ScaleVector(&target->W, factor);
 }
 
-void PrintMatrix(Matrix3D matrix)
+void PrintMatrix(Matrix3D *matrix)
 {
-    printf("X: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.X.x,
-           matrix.X.y,
-           matrix.X.z,
-           matrix.X.z);
-    printf("Y: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.Y.x,
-           matrix.Y.y,
-           matrix.Y.z,
-           matrix.Y.z);
-    printf("Z: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.Z.x,
-           matrix.Z.y,
-           matrix.Z.z,
-           matrix.Z.w);
-    printf("W: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix.W.x,
-           matrix.W.y,
-           matrix.W.z,
-           matrix.W.w);
+    printf("X: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix->X.x,
+           matrix->X.y,
+           matrix->X.z,
+           matrix->X.z);
+    printf("Y: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix->Y.x,
+           matrix->Y.y,
+           matrix->Y.z,
+           matrix->Y.z);
+    printf("Z: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix->Z.x,
+           matrix->Z.y,
+           matrix->Z.z,
+           matrix->Z.w);
+    printf("W: %20.10f i %20.10f j %20.10f k %20.10f l\n", matrix->W.x,
+           matrix->W.y,
+           matrix->W.z,
+           matrix->W.w);
 }
 
 void InvertMatrix(Matrix3D *matrix)
 {
     float det;
-    det = MatrixDeterminant(*matrix);
+    det = MatrixDeterminant(matrix);
     if (fabs(det) < EPSILON)
     {
         HomogeneousMatrix(matrix);
@@ -346,10 +346,10 @@ void LookAtMatrix(Vector3D eye,
     SetVector(eye.x, eye.y, eye.z, 1, &matrix->W);
 }
 
-int MatrixEquals(Matrix3D m1, Matrix3D m2)
+int MatrixEquals(Matrix3D *m1, Matrix3D *m2)
 {
-    return VectorEquals(m1.X, m2.X) && VectorEquals(m1.Y, m2.Y) &&
-           VectorEquals(m1.Z, m2.Z) && VectorEquals(m1.W, m2.W);
+    return VectorEquals(m1->X, m2->X) && VectorEquals(m1->Y, m2->Y) &&
+           VectorEquals(m1->Z, m2->Z) && VectorEquals(m1->W, m2->W);
 }
 
 void CastFloat(Matrix3D *m, float *f)

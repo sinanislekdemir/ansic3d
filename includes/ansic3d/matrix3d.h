@@ -105,18 +105,18 @@ void CreateRotationMatrix(Vector3D axis, float angle, Matrix3D *target);
 /**
  * Multiply two 4x4 matrices.
  */
-void MultiplyMatrix(Matrix3D m1, Matrix3D m2, Matrix3D *target);
+void MultiplyMatrix(Matrix3D *m1, Matrix3D *m2, Matrix3D *target);
 
 /**
  * Vector Transform for given matrix
  */
-void VectorTransform(Matrix3D matrix, Vector3D *target);
+void VectorTransform(Matrix3D *matrix, Vector3D *target);
 
 /**
  * Calculate the scaling factor of the linear transformation described by the 
  * matrix. (https://en.wikipedia.org/wiki/Determinant)
  */
-float MatrixDeterminant(Matrix3D matrix);
+float MatrixDeterminant(Matrix3D *matrix);
 
 /**
  * Calculate partial Determinant for MatrixDeterminant function
@@ -140,7 +140,7 @@ void ScaleMatrix(Matrix3D *target, float factor);
 /**
  * A simple printf wrapper for debugging
  */
-void PrintMatrix(Matrix3D matrix);
+void PrintMatrix(Matrix3D *matrix);
 
 /**
  * Invert the given matrix
@@ -162,7 +162,7 @@ void LookAtMatrix(Vector3D eye,
 /**
  * Check if two matrixes are equal
  */
-int MatrixEquals(Matrix3D m1, Matrix3D m2);
+int MatrixEquals(Matrix3D *m1, Matrix3D *m2);
 
 /**
  * Convert matrix to Float array [4][4]

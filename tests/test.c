@@ -333,7 +333,7 @@ int TestHomogeneousMatrix()
     SetVector(0, 0, 1, 0, &expect.Z);
     SetVector(0, 0, 0, 1, &expect.W);
     HomogeneousMatrix(&matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestCreateScaleMatrix()
@@ -346,7 +346,7 @@ int TestCreateScaleMatrix()
     SetVector(0, 0, 0, 1, &expect.W);
     SetVector(2, 3, 4, 1, &scale);
     CreateScaleMatrix(scale, &matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestCreateTranslationMatrix()
@@ -359,7 +359,7 @@ int TestCreateTranslationMatrix()
     SetVector(2, 3, 4, 1, &expect.W);
     SetVector(2, 3, 4, 1, &translation);
     CreateTranslationMatrix(translation, &matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestCreateScaleAndTranslationMatrix()
@@ -373,7 +373,7 @@ int TestCreateScaleAndTranslationMatrix()
     SetVector(2, 3, 4, 1, &scale);
     SetVector(2, 3, 4, 1, &translation);
     CreateScaleAndTranslationMatrix(scale, translation, &matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestCreateRotationMatrixX()
@@ -386,7 +386,7 @@ int TestCreateRotationMatrixX()
     SetVector(0, 1, 0, 0, &expect.Z);
     SetVector(0, 0, 0, 1, &expect.W);
     CreateRotationMatrixX(degtorad(-90), &target);
-    return MatrixEquals(target, expect);
+    return MatrixEquals(&target, &expect);
 }
 
 int TestCreateRotationMatrixY()
@@ -399,7 +399,7 @@ int TestCreateRotationMatrixY()
     SetVector(-1, 0, 0, 0, &expect.Z);
     SetVector(0, 0, 0, 1, &expect.W);
     CreateRotationMatrixY(degtorad(-90), &target);
-    return MatrixEquals(target, expect);
+    return MatrixEquals(&target, &expect);
 }
 
 int TestCreateRotationMatrixZ()
@@ -412,7 +412,7 @@ int TestCreateRotationMatrixZ()
     SetVector(0, 0, 1, 0, &expect.Z);
     SetVector(0, 0, 0, 1, &expect.W);
     CreateRotationMatrixZ(degtorad(-90), &target);
-    return MatrixEquals(target, expect);
+    return MatrixEquals(&target, &expect);
 }
 
 int TestCreateRotationMatrix()
@@ -427,7 +427,7 @@ int TestCreateRotationMatrix()
     expect.W.w = 1;
     HomogeneousMatrix(&matrix);
     CreateRotationMatrix(axis, degtorad(90), &matrix);
-    if (!MatrixEquals(expect, matrix))
+    if (!MatrixEquals(&expect, &matrix))
     {
         return 0;
     }
@@ -439,7 +439,7 @@ int TestCreateRotationMatrix()
     expect.Z.x = -1;
     expect.W.w = 1;
     CreateRotationMatrix(axis, degtorad(90), &matrix);
-    if (!MatrixEquals(expect, matrix))
+    if (!MatrixEquals(&expect, &matrix))
     {
         return 0;
     }
@@ -451,7 +451,7 @@ int TestCreateRotationMatrix()
     expect.Z.y = 1;
     expect.W.w = 1;
     CreateRotationMatrix(axis, degtorad(90), &matrix);
-    if (!MatrixEquals(expect, matrix))
+    if (!MatrixEquals(&expect, &matrix))
     {
         return 0;
     }
@@ -472,8 +472,8 @@ int TestMultiplyMatrix()
     SetVector(1, 0, 0, 0, &expect.Y);
     SetVector(0, 0, 1, 0, &expect.Z);
     SetVector(5, -10, 5, 1, &expect.W);
-    MultiplyMatrix(m1, m2, &target);
-    return MatrixEquals(expect, target);
+    MultiplyMatrix(&m1, &m2, &target);
+    return MatrixEquals(&expect, &target);
 }
 
 int TestVectorTransform()
@@ -483,7 +483,7 @@ int TestVectorTransform()
     SetVector(10, 5, 5, 1, &vector);
     SetVector(5, -10, 5, 1, &expect);
     CreateRotationMatrixZ(degtorad(-90), &matrix);
-    VectorTransform(matrix, &vector);
+    VectorTransform(&matrix, &vector);
     return VectorEquals(vector, expect);
 }
 
@@ -497,7 +497,7 @@ int TestMatrixDeterminant()
     SetVector(1, 0, 0, 0, &matrix.Y);
     SetVector(0, 0, 1, 0, &matrix.Z);
     SetVector(5, 10, 10, 1, &matrix.W);
-    determinant = MatrixDeterminant(matrix);
+    determinant = MatrixDeterminant(&matrix);
     expect = 1;
     return fabsf(expect - determinant) < PRECISION;
 }
@@ -515,7 +515,7 @@ int TestAdjointMatrix()
     SetVector(0, 0, 1, 0, &expect.Z);
     SetVector(10, -5, -10, 1, &expect.W);
     AdjointMatrix(&matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestScaleMatrix()
@@ -531,7 +531,7 @@ int TestScaleMatrix()
     SetVector(0, 0, 1.0 / 3.0, 0, &expect.Z);
     SetVector(5.0 / 3.0, 10.0 / 3.0, 10.0 / 3.0, 1.0 / 3.0, &expect.W);
     ScaleMatrix(&matrix, 1.0 / 3.0);
-    return MatrixEquals(expect, matrix);
+    return MatrixEquals(&expect, &matrix);
 }
 
 int TestInvertMatrix()
@@ -548,7 +548,7 @@ int TestInvertMatrix()
     SetVector(10, -5, -10, 1, &expect.W);
 
     InvertMatrix(&matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestTransposeMatrix()
@@ -565,7 +565,7 @@ int TestTransposeMatrix()
     SetVector(0, 0, 0, 1, &expect.W);
 
     TransposeMatrix(&matrix);
-    return MatrixEquals(matrix, expect);
+    return MatrixEquals(&matrix, &expect);
 }
 
 int TestLookAtMatrix()
@@ -582,7 +582,7 @@ int TestLookAtMatrix()
     SetVector(10, 10, 10, 1, &expect.W);
 
     LookAtMatrix(eye, target, up, &camera);
-    return MatrixEquals(camera, expect);
+    return MatrixEquals(&camera, &expect);
 }
 
 int TestCastFloat()
