@@ -1,5 +1,6 @@
 # Ansi C 3D Math Library
 
+[![Build Status](https://travis-ci.org/sinanislekdemir/ansic3d.svg?branch=master)](https://travis-ci.org/sinanislekdemir/ansic3d)
 
 Some codes are derived from GLScene project (glscene.org)
 

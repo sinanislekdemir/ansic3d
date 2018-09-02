@@ -922,4 +922,5 @@ int main()
     {
         printFAIL("TestCastFloat");
     }
+    return 0;
 }
