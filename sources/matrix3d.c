@@ -190,6 +190,7 @@ void VectorTransform(Matrix3D *matrix, Vector3D *target)
     org.x = target->x;
     org.y = target->y;
     org.z = target->z;
+    org.w = target->w;
     target->x = org.x * matrix->X.x + org.y * matrix->Y.x + org.z * matrix->Z.x + org.w * matrix->W.x;
     target->y = org.x * matrix->X.y + org.y * matrix->Y.y + org.z * matrix->Z.y + org.w * matrix->W.y;
     target->z = org.x * matrix->X.z + org.y * matrix->Y.z + org.z * matrix->Z.z + org.w * matrix->W.z;
@@ -314,18 +315,24 @@ void TransposeMatrix(Matrix3D *matrix)
     f = matrix->X.y;
     matrix->X.y = matrix->Y.x;
     matrix->Y.x = f;
+
     f = matrix->X.z;
     matrix->X.z = matrix->Z.x;
     matrix->Z.x = f;
+
     f = matrix->X.w;
     matrix->X.w = matrix->W.x;
     matrix->W.x = f;
+
     f = matrix->Y.z;
     matrix->Y.z = matrix->Z.y;
     matrix->Z.y = f;
+
     f = matrix->Y.w;
     matrix->Y.w = matrix->W.y;
     matrix->W.y = f;
+
+    f = matrix->Z.w;
     matrix->Z.w = matrix->W.z;
     matrix->W.z = f;
 }
@@ -334,16 +341,30 @@ void LookAtMatrix(Vector3D eye,
                   Vector3D target,
                   Vector3D up, Matrix3D *matrix)
 {
-    Vector3D x_axis, y_axis, z_axis;
-    SubVector(eye, target, &z_axis);
+    Vector3D x_axis, y_axis, z_axis, neg_eye;
+    SubVector(target, eye, &z_axis);
     NormalizeVector(&z_axis);
-    CrossProduct(up, z_axis, &x_axis);
+
+    CrossProduct(z_axis, up, &x_axis);
     NormalizeVector(&x_axis);
-    CrossProduct(z_axis, x_axis, &y_axis);
+
+    CrossProduct(x_axis, z_axis, &y_axis);
+
     CloneVector(x_axis, &matrix->X);
     CloneVector(y_axis, &matrix->Y);
     CloneVector(z_axis, &matrix->Z);
-    SetVector(eye.x, eye.y, eye.z, 1, &matrix->W);
+
+    matrix->Z.x = -matrix->Z.x;
+    matrix->Z.y = -matrix->Z.y;
+    matrix->Z.z = -matrix->Z.z;
+
+    SetVector(0, 0, 0, 1, &matrix->W);
+
+    TransposeMatrix(matrix);
+    SetVector(-eye.x, -eye.y, -eye.z, 1, &neg_eye);
+
+    VectorTransform(matrix, &neg_eye);
+    CloneVector(neg_eye, &matrix->W);
 }
 
 int MatrixEquals(Matrix3D *m1, Matrix3D *m2)

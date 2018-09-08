@@ -577,10 +577,10 @@ int TestLookAtMatrix()
     SetVector(0, 0, 0, 1, &target);
     SetVector(0, 0, 1, 0, &up);
 
-    SetVector(-0.7071067691, 0.7071067691, 0, 0, &expect.X);
-    SetVector(-0.4082482457, -0.4082482457, 0.8164964914, 0.8164964914, &expect.Y);
-    SetVector(0.5773501992, 0.5773501992, 0.5773501992, 0, &expect.Z);
-    SetVector(10, 10, 10, 1, &expect.W);
+    SetVector(-0.707106769, -0.408248246, 0.577350199, 0, &expect.X);
+    SetVector(0.707106769, -0.408248246, 0.577350199, 0, &expect.Y);
+    SetVector(0, 0.816496491, 0.577350199, 0, &expect.Z);
+    SetVector(0, 0, -17.3205051, 1, &expect.W);
 
     LookAtMatrix(eye, target, up, &camera);
     return MatrixEquals(&camera, &expect);
