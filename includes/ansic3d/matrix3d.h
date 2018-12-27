@@ -1,20 +1,20 @@
 /*
-    AnsiC3D - 3D Math Library
-    Copyright (C) 2018  Sinan ISLEKDEMIR - sinan@islekdemir.com
+   AnsiC3D - 3D Math Library
+   Copyright (C) 2018  Sinan ISLEKDEMIR - sinan@islekdemir.com
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+   */
 #ifndef MATRIX3D_H
 #define MATRIX3D_H
 
@@ -25,7 +25,7 @@
 
 typedef struct _Matrix3D
 {
-    Vector3D X, Y, Z, W;
+	Vector3D X, Y, Z, W;
 } Matrix3D;
 
 /**
@@ -65,7 +65,7 @@ void CreateTranslationMatrix(Vector3D v, Matrix3D *target);
  * Creates a Homogeneous Matrix and modifies Scale and Position vectors
  */
 void CreateScaleAndTranslationMatrix(Vector3D scale, Vector3D offset,
-                                     Matrix3D *target);
+		Matrix3D *target);
 
 /**
  * Create a Rotation Matrix to rotate a vector around X Axis by Sin and Cos
@@ -122,8 +122,8 @@ float MatrixDeterminant(Matrix3D *matrix);
  * Calculate partial Determinant for MatrixDeterminant function
  */
 float MatrixDetInternal(float a1, float a2, float a3, float b1,
-                        float b2, float b3, float c1, float c2,
-                        float c3);
+		float b2, float b3, float c1, float c2,
+		float c3);
 
 /**
  * The adjoint of a matrix A is the transpose of the cofactor matrix of A. 
@@ -157,8 +157,8 @@ void TransposeMatrix(Matrix3D *matrix);
  * Create a look at matrix to position a camera
  */
 void LookAtMatrix(Vector3D eye,
-                  Vector3D target,
-                  Vector3D up, Matrix3D *matrix);
+		Vector3D target,
+		Vector3D up, Matrix3D *matrix);
 /**
  * Check if two matrixes are equal
  */
